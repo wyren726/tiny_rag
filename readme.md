@@ -90,6 +90,21 @@ class OpenAIEmbedding(BaseEmbeddings):
             raise NotImplementedError
 ```
 
+```
+class JinaEmbedding(BaseEmbeddings):
+    """
+    class for Jina embeddings
+    """
+    def __init__(self, path: str = 'jinaai/jina-embeddings-v2-base-zh', is_api: bool = False) -> None:
+        super().__init__(path, is_api)
+        self._model = self.load_model()
+        
+    def get_embedding(self, text: str) -> List[float]:
+        return self._model.encode([text])[0].tolist()
+    
+```
+
+
 ## 3. 文档加载和切分
 
 接下来我们来实现一个文档加载和切分的类，这个类主要是用来加载文档并切分成文档片段。
