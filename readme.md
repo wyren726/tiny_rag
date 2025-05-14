@@ -90,7 +90,7 @@ class OpenAIEmbedding(BaseEmbeddings):
             raise NotImplementedError
 ```
 
-```
+```python
 class JinaEmbedding(BaseEmbeddings):
     """
     class for Jina embeddings
