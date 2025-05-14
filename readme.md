@@ -102,6 +102,15 @@ class JinaEmbedding(BaseEmbeddings):
     def get_embedding(self, text: str) -> List[float]:
         return self._model.encode([text])[0].tolist()
     
+    def load_model(self):
+        import torch
+        from transformers import AutoModel
+        if torch.cuda.is_available():
+            device = torch.device("cuda")
+        else:
+            device = torch.device("cpu")
+        model = AutoModel.from_pretrained(self.path, trust_remote_code=True).to(device)
+        return model
 ```
 
 
